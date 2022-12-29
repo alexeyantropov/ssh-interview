@@ -1,0 +1,18 @@
+---
+version: '3.3'
+services:
+  example:
+    image: almalinux:8
+    platform: linux/amd64 # It's necessary if you run docker on Arm64.
+    env_file: .env
+    restart: always
+    depends_on: []
+    privileged: true
+    cap_add:
+      - SYS_PTRACE
+    volumes:
+      - ./${SSH_KEYS_DIR}:/${SSH_KEYS_DIR}
+    entrypoint:
+      - /bin/bash
+      - -c 
+      - "echo \"$$(hostname) started.\"; while true; do date; sleep 60; done"
