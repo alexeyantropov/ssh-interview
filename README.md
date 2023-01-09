@@ -10,9 +10,13 @@ But what should we do with the interview tasks about software/databases/system/n
 
 I think the better way is using a similar service where the candidate may connect via SSH and get a set of tasks for online solving by their hands. The interviewers could see the candidate's terminal (w/o screen sharing) and may give some advice or may interact with the remote session.
 
-# What a solution I see for the problem
+# A solution that I see for the problem
 
 (There're my thoughts and a small technical task. May be like the White Paper in FAANG companies).
 
 The solution (or the product) should be maximum portable and independent from the environment. What follows from this? I can't use VMs images because the images depend on cloud providers. And I can use only open software and services (w/o the internals from my company e.g.)
-Good idea is using Docker and Docker Compose. But I need privileged containers for tools like strace (the ptrace syscall) or ip (a network namespace creation). In general it isn't a problem.
+A good idea is using Docker and Docker Compose. But I need privileged containers for tools like strace (the ptrace syscall) or ip (a network namespace creation). In general it isn't a problem.
+
+# Unanswered questions
+
+Should it use only an operating system image and docker-compose? Or does it have to build docker images that everybody could run? The second way avoids to run a package manager (like yum) to install software each time and saves a lot of time. But the first is faster during the developing process and I could get a minimal working model really soon.
