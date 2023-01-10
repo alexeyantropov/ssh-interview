@@ -3,7 +3,7 @@
 echo $0
 
 for i in _SSHKEYS _USERNAME _SUDOERS; do
-    env | egrep -q "^{i}="
+    env | egrep -q "^${i}="
     retval=$?
     if test $retval -ne 0; then
         echo "The env variable $i is not set!"
