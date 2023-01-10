@@ -1,6 +1,7 @@
 #!/bin/bash
 name='ssh-interview'
 tag=$(date '+%Y%m%d-%H%M%S')
+latest_tag='latest'
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 retval=$?
@@ -11,6 +12,7 @@ fi
 
 if test "$branch" != "main"; then
     tag="${branch}-${tag}"
+    latest_tag="${branch}.latest"
 fi 
 
-docker build --tag ${name}:${tag} docker/
+docker build --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
