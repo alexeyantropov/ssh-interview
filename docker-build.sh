@@ -15,4 +15,10 @@ if test "$branch" != "main"; then
     latest_tag="${branch}.latest"
 fi 
 
-docker build --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
+if test $(basename $0) = "docker-build.sh"; then
+    docker build --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
+elif test $(basename $0) = "docker-run.sh"; then
+    docker run --rm -it --cap-add=SYS_PTRACE ${name}:${latest_tag}
+else
+    docker exec -it $(docker ps | fgrep ${name}:${latest_tag} | awk '{print $1}') bash
+fi
