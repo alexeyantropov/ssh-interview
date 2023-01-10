@@ -10,23 +10,28 @@ ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
 ENV _ENTRYPOINT=${_ENTRYPOINT}
 
-VOLUME ${_SSHKEYS}
-
-RUN /usr/bin/true && \
-    yum -y --setopt=skip_missing_names_on_install=False install \
-    tmux \
-    shadow-utils \
-    sudo \
-    util-linux \
+RUN yum -y --setopt=skip_missing_names_on_install=False install \
+    iproute \
+    net-tools \
+    nmap-ncat \
+    openssh-server \
+    procps-ng \
     sed \
-    openssh-server && \
+    shadow-utils \
+    strace \
+    sudo \
+    tcpdump \
+    tmux \
+    util-linux \
+    /usr/bin/true && \
     useradd -U -m ${_USERNAME} --uid=9999 && \
-    /usr/bin/true
+    mkdir -p ${_SSHKEYS}
 
 COPY sudoers /etc/sudoers.d/sudoers
 COPY entry-point.sh ${_ENTRYPOINT}
+COPY dummy-ssh-key ${_SSHKEYS}/.
+COPY sshd_config /etc/ssh/sshd_config
 
-ENTRYPOINT [${_ENTRYPOINT}]
-
-USER ${_USERNAME}
+ENTRYPOINT ${_ENTRYPOINT}
+EXPOSE 22/tcp
 CMD ['/bin/bash']

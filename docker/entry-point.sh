@@ -1,7 +1,4 @@
-#!/bin/bash
-
-echo $0
-
+#!/bin/bash -x
 for i in _SSHKEYS _USERNAME _SUDOERS; do
     env | egrep -q "^${i}="
     retval=$?
@@ -16,7 +13,7 @@ set -e
 
 # the ssh-keys installation
 mkdir -p /home/${_USERNAME}/.ssh
-$authorized_keys_file="/home/${_USERNAME}/.ssh/authorized_keys"
+authorized_keys_file="/home/${_USERNAME}/.ssh/authorized_keys"
 touch $authorized_keys_file
 chmod -R 700 /home/${_USERNAME}/.ssh
 
@@ -26,3 +23,6 @@ done
 
 # sudoers fix
 sed s/__USER__/${_USERNAME}/g -i ${_SUDOERS}
+
+# run ssh server
+/usr/bin/ssh-keygen -A && /usr/sbin/sshd -D
