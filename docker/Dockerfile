@@ -4,9 +4,11 @@ LABEL maintainer='alexeyantropov@gmail.com'
 ARG _USERNAME='user'
 ARG _SSHKEYS='/ssh-keys'
 ARG _SUDOERS='/etc/sudoers.d/sudoers'
+ARG _ENTRYPOINT='/usr/local/bin/entry-point.sh'
 ENV _SSHKEYS=${_SSHKEYS}
 ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
+ENV _ENTRYPOINT=${_ENTRYPOINT}
 
 VOLUME ${_SSHKEYS}
 
@@ -22,9 +24,9 @@ RUN /usr/bin/true && \
     /usr/bin/true
 
 COPY sudoers /etc/sudoers.d/sudoers
-COPY entry-point.sh /usr/local/bin/
+COPY entry-point.sh ${_ENTRYPOINT}
 
-ENTRYPOINT ['/entry-point.sh']
+ENTRYPOINT [${_ENTRYPOINT}]
 
 USER ${_USERNAME}
 CMD ['/bin/bash']
