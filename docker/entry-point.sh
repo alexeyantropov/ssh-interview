@@ -1,5 +1,5 @@
 #!/bin/bash -x
-for i in _SSHKEYS _USERNAME _SUDOERS _PASSWORD_AUTH; do
+for i in _SSHKEYS _USERNAME _SUDOERS _PASSWORD_AUTH _DAEMONS; do
     env | egrep -q "^${i}="
     retval=$?
     if test $retval -ne 0; then
@@ -24,6 +24,12 @@ done
 
 # sudoers fix
 sed s/__USER__/${_USERNAME}/g -i ${_SUDOERS}
+
+# try to run daemons
+for daemon in ${_DAEMONS}/*; do
+    echo " * The daemon $daemon is found. I'll try to run it in background"
+    $daemon &
+done
 
 # setup user's password if avaible
 if test ${_PASSWORD_AUTH^^} = 'YES'; then

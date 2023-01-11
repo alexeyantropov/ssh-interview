@@ -6,12 +6,14 @@ ARG _SSHKEYS='/ssh-keys'
 ARG _SUDOERS='/etc/sudoers.d/sudoers'
 ARG _ENTRYPOINT='/usr/local/bin/entry-point.sh'
 ARG _PASSWORD_AUTH='yes'
+ARG _DAEMONS='/daemons'
 
 ENV _SSHKEYS=${_SSHKEYS}
 ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
 ENV _ENTRYPOINT=${_ENTRYPOINT}
 ENV _PASSWORD_AUTH=${_PASSWORD_AUTH}
+ENV _DAEMONS=${_DEAMONS}
 
 RUN yum -y --setopt=skip_missing_names_on_install=False install \
     iproute \
@@ -21,6 +23,8 @@ RUN yum -y --setopt=skip_missing_names_on_install=False install \
     openssl \
     passwd \
     procps-ng \
+    python3-requests \
+    python36 \
     sed \
     shadow-utils \
     strace \
@@ -30,7 +34,7 @@ RUN yum -y --setopt=skip_missing_names_on_install=False install \
     util-linux \
     /usr/bin/true && \
     useradd -U -m ${_USERNAME} --uid=9999 && \
-    mkdir -p ${_SSHKEYS} && \
+    mkdir -p ${_SSHKEYS} ${_DAEMONS} && \
     touch /var/log/lastlog
 
 COPY sudoers /etc/sudoers.d/sudoers
@@ -38,6 +42,7 @@ COPY entry-point.sh ${_ENTRYPOINT}
 COPY dummy-ssh-key ${_SSHKEYS}/.
 COPY sshd_config /etc/ssh/sshd_config
 COPY bash_profile /home/${_USERNAME}/.bash_profile
+COPY dummy-daemon.sh ${_DAEMONS}/.
 
 ENTRYPOINT ${_ENTRYPOINT}
 EXPOSE 22/tcp
