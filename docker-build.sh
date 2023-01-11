@@ -1,5 +1,5 @@
 #!/bin/bash
-name='ssh-interview'
+name='alexeyantropov/ssh-interview'
 tag=$(date '+%Y%m%d-%H%M%S')
 latest_tag='latest'
 
@@ -18,7 +18,7 @@ fi
 if test $(basename $0) = "docker-build.sh"; then
     docker build --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
 elif test $(basename $0) = "docker-run.sh"; then
-    docker run --rm -it --cap-add=SYS_PTRACE ${name}:${latest_tag}
+    docker run --rm -it --cap-add=SYS_PTRACE --publish 0.0.0.0:22222:22 ${name}:${latest_tag}
 else
     docker exec -it $(docker ps | fgrep ${name}:${latest_tag} | awk '{print $1}') bash
 fi

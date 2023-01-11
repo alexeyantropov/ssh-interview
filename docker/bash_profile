@@ -1,0 +1,6 @@
+_tmux_session='interview'
+tmux has-session -t $_tmux_session || tmux new-session -d -s $_tmux_session
+tmux has-session -t $_tmux_session && tmux attach-session -t $_tmux_session
+if [ -f ~/.bashrc ]; then
+	. ~/.bashrc
+fi

@@ -5,6 +5,7 @@ ARG _USERNAME='user'
 ARG _SSHKEYS='/ssh-keys'
 ARG _SUDOERS='/etc/sudoers.d/sudoers'
 ARG _ENTRYPOINT='/usr/local/bin/entry-point.sh'
+
 ENV _SSHKEYS=${_SSHKEYS}
 ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
@@ -25,12 +26,14 @@ RUN yum -y --setopt=skip_missing_names_on_install=False install \
     util-linux \
     /usr/bin/true && \
     useradd -U -m ${_USERNAME} --uid=9999 && \
-    mkdir -p ${_SSHKEYS}
+    mkdir -p ${_SSHKEYS} && \
+    touch /var/log/lastlog
 
 COPY sudoers /etc/sudoers.d/sudoers
 COPY entry-point.sh ${_ENTRYPOINT}
 COPY dummy-ssh-key ${_SSHKEYS}/.
 COPY sshd_config /etc/ssh/sshd_config
+COPY bash_profile /home/${_USERNAME}/.bash_profile
 
 ENTRYPOINT ${_ENTRYPOINT}
 EXPOSE 22/tcp
