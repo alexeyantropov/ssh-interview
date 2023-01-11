@@ -42,6 +42,7 @@ Coming soon...
 - ❌ Task example image
     - ❌ A simple task
     - ❌ scripts for rebuild all test images
+- ❌ Migrate to systemd image (to run databases, many daemons, etc)
 - ❌ Scripts or docker-compose for running specific task
 - ❌ A production task
 - ❌ Docker-compose or smtl like that
