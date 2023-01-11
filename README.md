@@ -34,18 +34,18 @@ Coming soon...
 
 # The roadmap
 - ✅ Basic image that provides
--- ✅ sshd
--- ✅ password auth
--- ✅ ssh keys auth
--- ✅ shared tmux session
--- ✅ scripts for building, run and debug the image
+    - ✅ sshd
+    - ✅ password auth
+    - ✅ ssh keys auth
+    - ✅ shared tmux session
+    - ✅ scripts for building, run and debug the image
 - ❌ Task example image
--- ❌ A simple task
--- ❌ scripts for rebuild all test images
+    - ❌ A simple task
+    - ❌ scripts for rebuild all test images
 - ❌ Scripts or docker-compose for running specific task
 - ❌ A production task
 - ❌ Docker-compose or smtl like that
--- ❌ For ssh-keys installation e.g.
+    - ❌ For ssh-keys installation e.g.
 - ❌ Scripts or docker-compose for running specific task
 - ❌ Dockerhub integration
-- Complete docs
+- ❌ Complete docs
