@@ -1,4 +1,7 @@
 #!/bin/bash
+_DAEMONS='/daemons' 
+build_args="--build-arg _DAEMONS=$_DAEMONS"
+
 name='alexeyantropov/ssh-interview'
 tag=$(date '+%Y%m%d-%H%M%S')
 latest_tag='latest'
@@ -16,9 +19,22 @@ if test "$branch" != "main"; then
 fi 
 
 if test $(basename $0) = "docker-build.sh"; then
-    docker build --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
+    docker build $build_args --tag ${name}:${tag} --tag ${name}:${latest_tag} docker/
+    for task in tasks/*; do
+        task_name=${name}_$(basename $task)
+        docker build $build_args --tag ${task_name}:${tag} --tag ${task_name}:${latest_tag} ${task}/
+    done
 elif test $(basename $0) = "docker-run.sh"; then
-    docker run --rm -it --cap-add=SYS_PTRACE --publish 0.0.0.0:22222:22 ${name}:${latest_tag}
+    run_opts='--rm -it --cap-add=SYS_PTRACE --publish 0.0.0.0:22222:22'
+    if test -z "$1"; then
+        docker run $run_opts ${name}:${latest_tag}
+    else
+        docker run $run_opts ${name}_$(basename $1):${latest_tag}
+    fi
 else
-    docker exec -it $(docker ps | fgrep ${name}:${latest_tag} | awk '{print $1}') bash
+    if test -z "$1"; then
+        docker exec -it $(docker ps | fgrep ${name}:${latest_tag} | awk '{print $1}') bash
+    else
+        docker exec -it $(docker ps | fgrep ${name}_$(basename $1):${latest_tag} | awk '{print $1}') bash
+    fi
 fi

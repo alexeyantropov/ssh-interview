@@ -6,14 +6,14 @@ ARG _SSHKEYS='/ssh-keys'
 ARG _SUDOERS='/etc/sudoers.d/sudoers'
 ARG _ENTRYPOINT='/usr/local/bin/entry-point.sh'
 ARG _PASSWORD_AUTH='yes'
-ARG _DAEMONS='/daemons'
+ARG _DAEMONS
 
 ENV _SSHKEYS=${_SSHKEYS}
 ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
 ENV _ENTRYPOINT=${_ENTRYPOINT}
 ENV _PASSWORD_AUTH=${_PASSWORD_AUTH}
-ENV _DAEMONS=${_DEAMONS}
+ENV _DAEMONS=${_DAEMONS}
 
 RUN yum -y --setopt=skip_missing_names_on_install=False install \
     iproute \
