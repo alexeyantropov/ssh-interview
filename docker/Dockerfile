@@ -5,17 +5,21 @@ ARG _USERNAME='user'
 ARG _SSHKEYS='/ssh-keys'
 ARG _SUDOERS='/etc/sudoers.d/sudoers'
 ARG _ENTRYPOINT='/usr/local/bin/entry-point.sh'
+ARG _PASSWORD_AUTH='yes'
 
 ENV _SSHKEYS=${_SSHKEYS}
 ENV _USERNAME=${_USERNAME}
 ENV _SUDOERS=${_SUDOERS}
 ENV _ENTRYPOINT=${_ENTRYPOINT}
+ENV _PASSWORD_AUTH=${_PASSWORD_AUTH}
 
 RUN yum -y --setopt=skip_missing_names_on_install=False install \
     iproute \
     net-tools \
     nmap-ncat \
     openssh-server \
+    openssl \
+    passwd \
     procps-ng \
     sed \
     shadow-utils \
