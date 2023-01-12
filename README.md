@@ -20,3 +20,33 @@ A good idea is using Docker and Docker Compose. But I need privileged containers
 # Unanswered questions
 
 Should it use only an operating system image and docker-compose? Or does it have to build docker images that everybody could run? The second way avoids to run a package manager (like yum) to install software each time and saves a lot of time. But the first is faster during the developing process and I could get a minimal working model really soon.
+
+# How it works
+## The basic image 'ssh-interview'
+
+You can login via SSH as user 'user' with ssh-key or password. A tmux session will open automatically after the user's first login. All extra user's sessions will be attached to that tmux session. As a result all users (a candidate and interviewers) will see and use the same session and will type on the same terminal. The interviewers may help the candidate if they want and could totally see a task solving process.
+
+The image could be used as the basic layer or for developing or debugging new tasks.
+
+## The tasks images
+
+Coming soon...
+
+# The roadmap
+- ✅ Basic image that provides
+    - ✅ sshd
+    - ✅ password auth
+    - ✅ ssh keys auth
+    - ✅ shared tmux session
+    - ✅ scripts for building, run and debug the image
+- ❌ Task example image
+    - ❌ A simple task
+    - ❌ scripts for rebuild all test images
+- ❌ Migrate to systemd image (to run databases, many daemons, etc)
+- ❌ Scripts or docker-compose for running specific task
+- ❌ A production task
+- ❌ Docker-compose or smtl like that
+    - ❌ For ssh-keys installation e.g.
+- ❌ Scripts or docker-compose for running specific task
+- ❌ Dockerhub integration
+- ❌ Complete docs
