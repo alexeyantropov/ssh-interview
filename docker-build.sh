@@ -25,7 +25,7 @@ if test $(basename $0) = "docker-build.sh"; then
         docker build $build_args --tag ${task_name}:${tag} --tag ${task_name}:${latest_tag} ${task}/
     done
 elif test $(basename $0) = "docker-run.sh"; then
-    run_opts='--rm -it --cap-add=SYS_PTRACE --publish 0.0.0.0:22222:22'
+    run_opts='--rm -it --privileged --cap-add=SYS_PTRACE --publish 0.0.0.0:22222:22'
     if test -z "$1"; then
         docker run $run_opts ${name}:${latest_tag}
     else
