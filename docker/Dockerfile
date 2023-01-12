@@ -23,12 +23,14 @@ RUN yum -y --setopt=skip_missing_names_on_install=False install \
     openssl \
     passwd \
     procps-ng \
+    python3-flask \
     python3-requests \
     python36 \
     sed \
     shadow-utils \
     strace \
     sudo \
+    telnet \
     tcpdump \
     tmux \
     util-linux \
