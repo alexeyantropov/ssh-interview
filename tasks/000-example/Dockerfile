@@ -1,4 +1,5 @@
-FROM alexeyantropov/ssh-interview:develop.latest
+ARG _FROM_TAG
+FROM alexeyantropov/ssh-interview:${_FROM_TAG}
 
 ARG _DAEMONS
 

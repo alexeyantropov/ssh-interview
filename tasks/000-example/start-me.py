@@ -18,7 +18,7 @@ def log(m: str):
     try:
         fd = open(log, 'w')
     except:
-        sys.exit(0)
+        sys.exit(1)
     fd.write(m)
     fd.close
 

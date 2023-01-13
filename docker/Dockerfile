@@ -17,6 +17,7 @@ ENV _DAEMONS=${_DAEMONS}
 
 RUN yum -y --setopt=skip_missing_names_on_install=False install \
     iproute \
+    lsof \
     net-tools \
     nmap-ncat \
     openssh-server \
@@ -30,8 +31,8 @@ RUN yum -y --setopt=skip_missing_names_on_install=False install \
     shadow-utils \
     strace \
     sudo \
-    telnet \
     tcpdump \
+    telnet \
     tmux \
     util-linux \
     /usr/bin/true && \
