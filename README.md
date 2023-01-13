@@ -39,9 +39,9 @@ Coming soon...
     - ✅ ssh keys auth
     - ✅ shared tmux session
     - ✅ scripts for building, run and debug the image
-- ❌ Task example image
-    - ❌ A simple task
-    - ❌ scripts for rebuild all test images
+- ✅ Task example image
+    - ✅ A simple task
+    - ✅ scripts for rebuild all test images
 - ❌ Migrate to systemd image (to run databases, many daemons, etc)
 - ❌ Scripts or docker-compose for running specific task
 - ❌ A production task
