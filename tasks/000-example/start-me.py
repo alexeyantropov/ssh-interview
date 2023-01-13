@@ -19,7 +19,7 @@ def log(m: str):
         fd = open(log, 'w')
     except:
         sys.exit(1)
-    fd.write(m)
+    fd.write(m + '\n')
     fd.close
 
 def main():
