@@ -45,6 +45,7 @@ Coming soon...
 - ❌ Python code obfuscation
 - ✅ Migrate to systemd image (to run databases, many daemons, etc)
 - ❌ Scripts or docker-compose for running specific task
+- ❌ Fix sshd for avoid ssh-sockets forwarding
 - ❌ A production task
     - ❌ 100% du/df issue: lsof deleted, lvmresize, restore deleted but not closed file via /proc and smt like t
     - ❌ service 502 issue: nginx -> apache/uwsgi/etc (down) -> MySQL (somethink wrong with start or privileges), slow queries, worker limits, etc 
