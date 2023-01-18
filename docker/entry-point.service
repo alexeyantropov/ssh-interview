@@ -1,0 +1,23 @@
+[Unit]
+Description=entry-point
+
+[Service]
+Type=simple
+
+ExecStart=__ENTRYPOINT__
+EnvironmentFile=__ENTRYPOINT_SYSCONFIG__
+
+RestartSec=15
+LogLevelMax=info
+#StandardOutput=syslog
+StandardOutput=journal+console
+Requires=sshd.service sshd-keygen.target systemd-update-utmp-runlevel.service
+#StandardError=syslog
+SyslogIdentifier=entry-point
+
+KillSignal=SIGTERM
+TimeoutStartSec=15
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target

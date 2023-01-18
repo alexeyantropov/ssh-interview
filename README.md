@@ -43,7 +43,7 @@ Coming soon...
     - ✅ A simple task
     - ✅ scripts for rebuild all test images
 - ❌ Python code obfuscation
-- ❌ Migrate to systemd image (to run databases, many daemons, etc)
+- ✅ Migrate to systemd image (to run databases, many daemons, etc)
 - ❌ Scripts or docker-compose for running specific task
 - ❌ A production task
     - ❌ 100% du/df issue: lsof deleted, lvmresize, restore deleted but not closed file via /proc and smt like t
